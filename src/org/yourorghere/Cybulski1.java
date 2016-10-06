@@ -90,25 +90,34 @@ public class Cybulski1 implements GLEventListener {
         gl.glLoadIdentity();
 
         // Drawing Using Triangles
-        gl.glTranslatef(-1.5f, 0.0f, -6.0f);
+        gl.glLoadIdentity();
+        gl.glTranslatef(1.0f, 0.0f, -6.0f);
+        // Drawing Using Triangles
         gl.glBegin(GL.GL_TRIANGLES);
-        gl.glVertex3f(-1.0f, 4.0f, -6.0f);
-        gl.glVertex3f(-2.0f, 2.0f, -6.0f);
-        gl.glVertex3f(0.0f, 2.0f, -6.0f);
-
+        gl.glColor3f(3.0f, -6.0f, 6.0f);
+        gl.glVertex3f(-1.0f, 1.0f, -3.0f);
+        gl.glVertex3f(-2.0f, -1.0f, -3.0f);
+        gl.glVertex3f(0.0f, -1.0f, -3.0f);
         gl.glEnd();
 
-        gl.glTranslatef(-1.0f, 0.0f, -6.0f);
-
+        gl.glTranslatef(-1.0f, -2.0f, -2.0f);
         gl.glBegin(GL.GL_QUADS);
-        gl.glColor3f(0.0f, 3.0f, 7.0f);
-        gl.glVertex3f(-1.0f, 2.0f, 0.0f);  // Top Left
-        gl.glVertex3f(1.0f, 2.0f, 0.0f);   // Top Right
-        gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
-        gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
+        gl.glColor3f(1.0f, 2.0f, -4.0f);
+        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glVertex3f(1.0f, -1.0f, -1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
         gl.glEnd();
 
-        // Flush all drawing operations to the graphics card
+        gl.glTranslatef(0.0f, -1.5f, -4.5f);
+        gl.glBegin(GL.GL_QUADS);
+        gl.glColor3f(5.0f, 2.0f, 5.0f);
+        gl.glVertex3f(-0.5f, 1.0f, -1.0f);
+        gl.glVertex3f(0.5f, 1.0f, -1.0f);
+        gl.glVertex3f(0.5f, -1.0f, -1.0f);
+        gl.glVertex3f(-0.5f, -1.0f, -1.0f);
+        gl.glEnd();
+
         gl.glFlush();
     }
 
