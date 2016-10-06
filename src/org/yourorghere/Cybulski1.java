@@ -90,10 +90,20 @@ public class Cybulski1 implements GLEventListener {
         gl.glLoadIdentity();
 
         // Drawing Using Triangles
+        gl.glTranslatef(-1.5f, 0.0f, -6.0f);
         gl.glBegin(GL.GL_TRIANGLES);
         gl.glVertex3f(-1.0f, 1.0f, -6.0f);
         gl.glVertex3f(-2.0f, -1.0f, -6.0f);
         gl.glVertex3f(0.0f, -1.0f, -6.0f);
+        gl.glEnd();
+
+        gl.glTranslatef(3.0f, 0.0f, 0.0f);
+
+        gl.glBegin(GL.GL_QUADS);
+        gl.glVertex3f(-1.0f, 1.0f, 0.0f);  // Top Left
+        gl.glVertex3f(1.0f, 1.0f, 0.0f);   // Top Right
+        gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
+        gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
         gl.glEnd();
 
         // Flush all drawing operations to the graphics card
