@@ -101,7 +101,7 @@ public class Cybulski1 implements GLEventListener {
         gl.glTranslatef(3.0f, 0.0f, 0.0f);
 
         gl.glBegin(GL.GL_QUADS);
-        gl.glColor3f(0.0f, 7.0f, 7.0f);
+        gl.glColor3f(0.0f, 3.0f, 7.0f);
         gl.glVertex3f(-1.0f, 1.0f, 0.0f);  // Top Left
         gl.glVertex3f(1.0f, 1.0f, 0.0f);   // Top Right
         gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
