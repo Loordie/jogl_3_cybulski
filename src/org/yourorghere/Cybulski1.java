@@ -11,7 +11,7 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
 /**
- * Cybulski1.java <BR>
+ * JOGL.java <BR>
  * author: Brian Paul (converted to Java by Ron Cemer and Sven Goethel)
  * <P>
  *
@@ -61,7 +61,11 @@ public class Cybulski1 implements GLEventListener {
 
         // Setup the drawing area and shading mode
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        gl.glShadeModel(GL.GL_SMOOTH); // try setting this to GL_FLAT and see what happens.
+        gl.glShadeModel(GL.GL_SMOOTH);
+        gl.glDepthFunc(GL.GL_LEQUAL);
+        gl.glEnable(GL.GL_DEPTH_TEST);
+
+        // try setting this to GL_FLAT and see what happens.
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -81,57 +85,23 @@ public class Cybulski1 implements GLEventListener {
         gl.glLoadIdentity();
     }
 
-    public void display(GLAutoDrawable drawable) {
-        GL gl = drawable.getGL();
-
-        // Clear the drawing area
-        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-        // Reset the current matrix to the "identity"
-        gl.glLoadIdentity();
-
-        // Drawing Using Triangles
-        gl.glLoadIdentity();
-        gl.glTranslatef(1.0f, 0.0f, -3.0f);
-        //gl.glTranslatef(-1.5f, 0.0f, -6.0f);
-
-        // Drawing Using Triangles
-        // gl.glBegin(GL.GL_TRIANGLES);
-        //gl.glColor3f(3.0f, -6.0f, 6.0f);
-        //gl.glVertex3f(-1.0f, 1.0f, -3.0f);
-        //gl.glVertex3f(-2.0f, -1.0f, -3.0f);
-        //gl.glVertex3f(0.0f, -1.0f, -3.0f);
-        //gl.glEnd();
-        //kolo 
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        
-        float x, y, kat;
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f, 0.0f, -3.0f); //?rodek
-        for (kat = 0.0f; kat < (2.0f * Math.PI);
-                kat += (Math.PI / 32.0f)) {
-            x = 1.5f * (float) Math.sin(kat);
-            y = 1.5f * (float) Math.cos(kat);
-            gl.glVertex3f(x, y, -6.0f); //kolejne punkty
-        }
+    public void drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float z, GL gl) {
+        gl.glBegin(GL.GL_TRIANGLES);
+        gl.glVertex3f(x3, y3, -6.0f);
+        gl.glVertex3f(x1, y1, -6.0f);
+        gl.glVertex3f(x2, y2, -6.0f);
         gl.glEnd();
-       // gl.glEnd();
+}
 
-        //gl.glTranslatef(-1.0f, -2.0f, -2.0f);
-        //gl.glBegin(GL.GL_QUADS);
-        //gl.glColor3f(1.0f, 2.0f, -4.0f);
-        //gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        //gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        //gl.glVertex3f(1.0f, -1.0f, -1.0f);
-        //gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        //gl.glEnd();
-        //gl.glTranslatef(0.0f, -1.5f, -4.5f);
-        //gl.glBegin(GL.GL_QUADS);
-        //gl.glColor3f(5.0f, 2.0f, 5.0f);
-        //gl.glVertex3f(-0.5f, 1.0f, -1.0f);
-        //gl.glVertex3f(0.5f, 1.0f, -1.0f);
-        //gl.glVertex3f(0.5f, -1.0f, -1.0f);
-        //gl.glVertex3f(-0.5f, -1.0f, -1.0f);
-        //gl.glEnd();
+public void display(GLAutoDrawable drawable) {
+
+        GL gl = drawable.getGL();
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        gl.glLoadIdentity();
+
+        drawTriangle((float) 1.0, (float) 0.0, (float) 3.0, (float) 0.0, (float) 2.0, (float) 2.0, (float) -6.0, gl);
+
+        gl.glEnd();
         gl.glFlush();
     }
 
