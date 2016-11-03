@@ -24,7 +24,7 @@ import javax.media.opengl.glu.GLU;
  */
 public class Cybulski1 implements GLEventListener {
 
-    //statyczne pola okre?aj?e rotacj? wok? osi X i Y
+    //statyczne pola okre?laj?ce rotacj? wokó? osi X i Y
     private static float xrot = 0.0f, yrot = 0.0f;
 
     public static void main(String[] args) {
@@ -51,7 +51,7 @@ public class Cybulski1 implements GLEventListener {
                 }).start();
             }
         });
-        //Obs?ga klawiszy strza?k
+        //Obs?uga klawiszy strza?ek
         frame.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -98,28 +98,28 @@ public class Cybulski1 implements GLEventListener {
         // Setup the drawing area and shading mode
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         gl.glShadeModel(GL.GL_SMOOTH);
-        //wy?czenie wewn?rzych stron prymityw?
+        //wy??czenie wewn?trzych stron prymitywów
         gl.glEnable(GL.GL_CULL_FACE);// try setting this to GL_FLAT and see what happens.
 
-        float ambientLight[] = {0.3f, 0.3f, 0.3f, 1.0f};//swiat? otaczaj?e
-        float diffuseLight[] = {0.7f, 0.7f, 0.7f, 1.0f};//?iat? rozproszone
-        float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //?iat? odbite
-        float lightPos[] = {0.0f, 150.0f, 150.0f, 1.0f};//pozycja ?iat?
-//(czwarty parametr okre?a odleg?? ???:
-//0.0f-niesko?zona; 1.0f-okre?ona przez pozosta? parametry)
-        gl.glEnable(GL.GL_LIGHTING); //uaktywnienie o?ietlenia
-//ustawienie parametr? ??? ?iat? nr. 0
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0); //swiat? otaczaj?e
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuseLight, 0); //?iat? rozproszone
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0); //?iat? odbite
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, lightPos, 0); //pozycja ?iat?
-        gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ??? ?iat? nr. 0
-        gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie ?edzenia kolor?
-//kolory b?? ustalane za pomoc? glColor
+        float ambientLight[] = {0.3f, 0.3f, 0.3f, 1.0f};//swiat?o otaczaj?ce
+        float diffuseLight[] = {0.7f, 0.7f, 0.7f, 1.0f};//?wiat?o rozproszone
+        float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
+        float lightPos[] = {0.0f, 150.0f, 150.0f, 1.0f};//pozycja ?wiat?a
+//(czwarty parametr okre?la odleg?o?? ?ród?a:
+//0.0f-niesko?czona; 1.0f-okre?lona przez pozosta?e parametry)
+        gl.glEnable(GL.GL_LIGHTING); //uaktywnienie o?wietlenia
+//ustawienie parametrów ?ród?a ?wiat?a nr. 0
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0); //swiat?o otaczaj?ce
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuseLight, 0); //?wiat?o rozproszone
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0); //?wiat?o odbite
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, lightPos, 0); //pozycja ?wiat?a
+        gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród?a ?wiat?a nr. 0
+        gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie ?ledzenia kolorów
+//kolory b?d? ustalane za pomoc? glColor
         gl.glColorMaterial(GL.GL_FRONT, GL.GL_AMBIENT_AND_DIFFUSE);
-//Ustawienie jasno?i i odblaskowo?i obiekt?
-        float specref[] = {1.0f, 1.0f, 1.0f, 1.0f}; //parametry odblaskowo?i
-        gl.glMaterialfv(GL_FRONT, GL_SPECULAR, specref,0);
+//Ustawienie jasno?ci i odblaskowo?ci obiektów
+        float specref[] = {1.0f, 1.0f, 1.0f, 1.0f}; //parametry odblaskowo?ci
+        gl.glMaterialfv(GL_FRONT, GL_SPECULAR, specref, 0);
         gl.glMateriali(GL_FRONT, GL_SHININESS, 128);
     }
 
@@ -158,78 +158,76 @@ public class Cybulski1 implements GLEventListener {
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
-        gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuni?ie o 6 jednostek
-        gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wok? osi X
-        gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wok? osi Y
+        gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuni?cie o 6 jednostek
+        gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
+        gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
 
         //gl.glBegin(GL.GL_TRIANGLES);
         //pierwszy bok          
-      //  gl.glColor3f(1.0f, 0.0f, 0.0f);
-      // gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-       // gl.glVertex3f(1.0f, -1.0f, 1.0f);
-       // gl.glVertex3f(0.0f, 1.0f, 0.0f);
+        //  gl.glColor3f(1.0f, 0.0f, 0.0f);
+        // gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        // gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        // gl.glVertex3f(0.0f, 1.0f, 0.0f);
 //drugi bok
-       // gl.glColor3f(0.0f, 1.0f, 0.0f);
-       // gl.glVertex3f(0.0f, 1.0f, 0.0f);
-       // gl.glVertex3f(1.0f, -1.0f, -1.0f);
-       // gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        // gl.glColor3f(0.0f, 1.0f, 0.0f);
+        // gl.glVertex3f(0.0f, 1.0f, 0.0f);
+        // gl.glVertex3f(1.0f, -1.0f, -1.0f);
+        // gl.glVertex3f(-1.0f, -1.0f, -1.0f);
 //trzeci bok
-       // gl.glColor3f(1.0f, 1.0f, 0.0f);
-       // gl.glVertex3f(0.0f, 1.0f, 0.0f);
-       // gl.glVertex3f(1.0f, -1.0f, 1.0f);
-       // gl.glVertex3f(1.0f, -1.0f, -1.0f);
-
+        // gl.glColor3f(1.0f, 1.0f, 0.0f);
+        // gl.glVertex3f(0.0f, 1.0f, 0.0f);
+        // gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        // gl.glVertex3f(1.0f, -1.0f, -1.0f);
 //czwarty bok
-       // gl.glColor3f(1.0f, 2.0f, 0.0f);
+        // gl.glColor3f(1.0f, 2.0f, 0.0f);
         //gl.glVertex3f(0.0f, 1.0f, 0.0f);
-       // gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-       // gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-      //  gl.glEnd();
-
+        // gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        // gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        //  gl.glEnd();
         gl.glBegin(GL.GL_QUADS);
-//?iana dolna
+
+//?ciana przednia
+        gl.glColor3f(1.0f, 0.0f, 0.0f);
+        gl.glNormal3f(0.0f, 0.0f, 1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+//sciana tylnia
+        gl.glColor3f(0.0f, 1.0f, 0.0f);
+        gl.glNormal3f(0.0f, 0.0f, -1.0f);
+        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glVertex3f(1.0f, -1.0f, -1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+//?ciana lewa
+        gl.glColor3f(0.0f, 0.0f, 1.0f);
+        gl.glNormal3f(-1.0f, 0.0f, 0.0f);
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+//?ciana prawa
+        gl.glColor3f(1.0f, 1.0f, 0.0f);
+        gl.glNormal3f(1.0f, 0.0f, 0.0f);
+        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glVertex3f(1.0f, -1.0f, -1.0f);
+//?ciana dolna
         gl.glColor3f(1.0f, 0.0f, 1.0f);
+        gl.glNormal3f(0.0f, -1.0f, 0.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
-
-//?iana przednia
-        gl.glColor3f(1.0f, 0.0f, 0.0f);
-       gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-       gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-//sciana tylnia
-         gl.glColor3f(0.0f, 1.0f, 0.0f);
-         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-         gl.glVertex3f(1.0f, 1.0f, -1.0f);
-         gl.glVertex3f(1.0f, -1.0f, -1.0f);
-         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-//?iana lewa
-         gl.glColor3f(0.0f, 0.0f, 1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-//?iana prawa
-         gl.glColor3f(1.0f, 1.0f, 0.0f);
-         gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(1.0f, -1.0f, 1.0f);
-         gl.glVertex3f(1.0f, -1.0f, -1.0f);
-//?iana dolna
-         gl.glColor3f(1.0f, 0.0f, 1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-         gl.glVertex3f(1.0f, -1.0f, -1.0f);
-         gl.glVertex3f(1.0f, -1.0f, 1.0f);
 // sciana gorna
-           gl.glColor3f(1.0f, 1.0f, 1.0f);
-         gl.glVertex3f(-1.0f, 1.0f, 1.0f);        
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);          
-         gl.glVertex3f(1.0f, 1.0f, -1.0f); 
-         gl.glVertex3f(-1.0f, 1.0f, -1.0f); 
+        gl.glColor3f(1.0f, 1.0f, 1.0f);
+        gl.glNormal3f(0.0f, 1.0f, 0.0f);
+        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
         gl.glEnd();
 
         // float x, y, kat;
