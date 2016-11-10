@@ -1,5 +1,4 @@
 package org.yourorghere;
-
 import com.sun.opengl.util.Animator;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
@@ -117,7 +116,7 @@ public class Cybulski1 implements GLEventListener {
         // Enable VSync
         gl.setSwapInterval(1);
 
-    //warto?ci sk?adowe o?wietlenia i koordynaty ?ród?a ?wiat?a
+        //warto?ci sk?adowe o?wietlenia i koordynaty ?ród?a ?wiat?a
         //(czwarty parametr okre?la odleg?o?? ?ród?a:
         //0.0f-niesko?czona; 1.0f-okre?lona przez pozosta?e parametry)
         gl.glEnable(GL.GL_LIGHTING); //uaktywnienie o?wietlenia
@@ -159,6 +158,67 @@ public class Cybulski1 implements GLEventListener {
         gl.glLoadIdentity();
     }
 
+    void stozek(GL gl) {
+//wywo?ujemy automatyczne normalizowanie normalnych
+        gl.glEnable(GL.GL_NORMALIZE);
+        float x, y, kat;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, -2.0f); //wierzcholek stozka
+        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+            x = (float) Math.sin(kat);
+            y = (float) Math.cos(kat);
+            gl.glNormal3f((float) Math.sin(kat), (float) Math.cos(kat), -2.0f);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glNormal3f(0.0f, 0.0f, 1.0f);
+        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
+        for (kat = 2.0f * (float) Math.PI; kat > 0.0f; kat -= (Math.PI / 32.0f)) {
+            x = (float) Math.sin(kat);
+            y = (float) Math.cos(kat);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+
+    }
+
+    void walec(GL gl) {
+//wywo?ujemy automatyczne normalizowanie normalnych
+//bo operacja skalowania je zniekszta?ci
+        gl.glEnable(GL.GL_NORMALIZE);
+        float x, y, kat;
+        gl.glBegin(GL.GL_QUAD_STRIP);
+        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+            x = 0.5f * (float) Math.sin(kat);
+            y = 0.5f * (float) Math.cos(kat);
+            gl.glNormal3f((float) Math.sin(kat), (float) Math.cos(kat), 0.0f);
+            gl.glVertex3f(x, y, -1.0f);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+        gl.glNormal3f(0.0f, 0.0f, -1.0f);
+        x = y = kat = 0.0f;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, -1.0f); //srodek kola
+        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+            x = 0.5f * (float) Math.sin(kat);
+            y = 0.5f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, -1.0f);
+        }
+        gl.glEnd();
+        gl.glNormal3f(0.0f, 0.0f, 1.0f);
+        x = y = kat = 0.0f;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
+        for (kat = 2.0f * (float) Math.PI; kat > 0.0f; kat -= (Math.PI / 32.0f)) {
+            x = 0.5f * (float) Math.sin(kat);
+            y = 0.5f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+    }
+
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
 
@@ -166,7 +226,7 @@ public class Cybulski1 implements GLEventListener {
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
-        gl.glTranslatef(0.0f, 0.0f, -9.0f); //przesuni?cie o 6 jednostek
+        gl.glTranslatef(0.0f, 0.0f, -20.0f); //przesuni?cie o 6 jednostek
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
 
@@ -179,7 +239,13 @@ public class Cybulski1 implements GLEventListener {
         gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród?a ?wiat?a nr. 0
         gl.glEnable(GL.GL_COLOR_MATERIAL);
 
-        drzewko(gl);
+        for(int i=0; i<10 ;i++)
+        {
+            drzewko(gl);
+            gl.glTranslatef(4.0f, 0.0f, 0.0f);
+            drzewko(gl);
+            gl.glTranslatef(-4.0f, 4.0f, 0.0f);
+        }
 
 //gl.glBegin(GL.GL_QUADS);
 ////?ciana przednia
@@ -285,89 +351,35 @@ public class Cybulski1 implements GLEventListener {
 //}
 // gl.glEnd();       // Flush all drawing operations to the graphics card
         //  gl.glFlush();
-  //drzewko      
+        //drzewko      
     }
 
     void drzewko(GL gl) {
+         gl.glPushMatrix();
         gl.glColor3f(0.0f, 1.0f, 0.0f);
         stozek(gl);
-
-        gl.glScalef(1.0f, 1.0f, 1.0f);
-        gl.glTranslatef(0.0f, 0.0f, 1.0f);
+        gl.glColor3f(0.0f, 1.0f, 0.0f);
         stozek(gl);
 
         gl.glScalef(1.2f, 1.2f, 1.0f);
         gl.glTranslatef(0.0f, 0.0f, 1.0f);
         stozek(gl);
 
-        gl.glColor3f(195/256f, 128/256f, 0.0f);
-        gl.glScalef(0.5f, 0.5f, 0.5f);
+        gl.glScalef(1.4f, 1.4f, 1.0f);
+        gl.glTranslatef(0.0f, 0.0f, 1.0f);
+        stozek(gl);
+
+        gl.glColor3f(0.210f, 0.105f, 0.0f);
+        gl.glScalef(0.7f, 0.7f, 1.0f);
         gl.glTranslatef(0.0f, 0.0f, 1.0f);
         walec(gl);
+        gl.glPopMatrix();
+        
+        
+        
     }
     
-
-    void walec(GL gl) {
-//wywo?ujemy automatyczne normalizowanie normalnych
-//bo operacja skalowania je zniekszta?ci
-        gl.glEnable(GL.GL_NORMALIZE);
-        float x, y, kat;
-        gl.glBegin(GL.GL_QUAD_STRIP);
-        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
-            x = 0.5f * (float) Math.sin(kat);
-            y = 0.5f * (float) Math.cos(kat);
-            gl.glNormal3f((float) Math.sin(kat), (float) Math.cos(kat), 0.0f);
-            gl.glVertex3f(x, y, -1.0f);
-            gl.glVertex3f(x, y, 0.0f);
-        }
-        gl.glEnd();
-        gl.glNormal3f(0.0f, 0.0f, -1.0f);
-        x = y = kat = 0.0f;
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f, 0.0f, -1.0f); //srodek kola
-        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
-            x = 0.5f * (float) Math.sin(kat);
-            y = 0.5f * (float) Math.cos(kat);
-            gl.glVertex3f(x, y, -1.0f);
-        }
-        gl.glEnd();
-        gl.glNormal3f(0.0f, 0.0f, 1.0f);
-        x = y = kat = 0.0f;
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
-        for (kat = 2.0f * (float) Math.PI; kat > 0.0f; kat -= (Math.PI / 32.0f)) {
-            x = 0.5f * (float) Math.sin(kat);
-            y = 0.5f * (float) Math.cos(kat);
-            gl.glVertex3f(x, y, 0.0f);
-        }
-        gl.glEnd();
-    }
-
-    void stozek(GL gl) {
-//wywo?ujemy automatyczne normalizowanie normalnych
-        gl.glEnable(GL.GL_NORMALIZE);
-        float x, y, kat;
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f, 0.0f, -2.0f); //wierzcholek stozka
-        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
-            x = (float) Math.sin(kat);
-            y = (float) Math.cos(kat);
-            gl.glNormal3f((float) Math.sin(kat), (float) Math.cos(kat), -2.0f);
-            gl.glVertex3f(x, y, 0.0f);
-        }
-        gl.glEnd();
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glNormal3f(0.0f, 0.0f, 1.0f);
-        gl.glVertex3f(0.0f, 0.0f, 0.0f); //srodek kola
-        for (kat = 2.0f * (float) Math.PI; kat > 0.0f; kat -= (Math.PI / 32.0f)) {
-            x = (float) Math.sin(kat);
-            y = (float) Math.cos(kat);
-            gl.glVertex3f(x, y, 0.0f);
-        }
-        gl.glEnd();
-
-    }
-
+    
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
 }
