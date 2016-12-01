@@ -30,8 +30,6 @@ public class Cybulski1 implements GLEventListener {
 
     private static float xrot = 0.0f, yrot = 0.0f;
 
-    
-
     public static float ambientLight[] = {0.3f, 0.3f, 0.3f, 1.0f};//swiat?o otaczaj?ce
     public static float diffuseLight[] = {0.7f, 0.7f, 0.7f, 1.0f};//?wiat?o rozproszone
     public static float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
@@ -83,7 +81,7 @@ public class Cybulski1 implements GLEventListener {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     yrot -= 1.0f;
                 }
-             
+
                 if (e.getKeyChar() == 'q') {
                     ambientLight = new float[]{ambientLight[0] - 0.1f, ambientLight[1] - 0.1f, ambientLight[2] - 0.1f, ambientLight[3] - 0.01f};
                 }
@@ -129,12 +127,11 @@ public class Cybulski1 implements GLEventListener {
 
         GL gl = drawable.getGL();
         System.err.println("INIT GL IS: " + gl.getClass().getName());
-       
-        // Enable VSync
 
+        // Enable VSync
         gl.setSwapInterval(1);
 
-    //warto?ci sk?adowe o?wietlenia i koordynaty ?ród?a ?wiat?a
+        //warto?ci sk?adowe o?wietlenia i koordynaty ?ród?a ?wiat?a
         //(czwarty parametr okre?la odleg?o?? ?ród?a:
         //0.0f-niesko?czona; 1.0f-okre?lona przez pozosta?e parametry)
         gl.glEnable(GL.GL_LIGHTING); //uaktywnienie o?wietlenia
@@ -310,7 +307,7 @@ public class Cybulski1 implements GLEventListener {
 ////uaktywnienie ?ród?a ?wiat?a nr. 0
         gl.glEnable(GL.GL_COLOR_MATERIAL);
 
-      //koparka.Rysuj(gl);
+        //koparka.Rysuj(gl);
 //for(int i=0; i<7; i++){
 //    gl.glPushMatrix();
 //        for(int k=0; k<7; k++){
@@ -320,8 +317,11 @@ public class Cybulski1 implements GLEventListener {
 //        gl.glPopMatrix();
 //        gl.glTranslatef(0.0f,1.8f,0.0f);
 //        }
+       
+
+               gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
         gl.glBegin(GL.GL_QUADS);
-//?ciana przednia
+////?ciana przednia
         gl.glTexCoord2f(1.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glTexCoord2f(0.0f, 1.0f);
@@ -331,7 +331,7 @@ public class Cybulski1 implements GLEventListener {
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
 //sciana tylnia
-
+        
         gl.glTexCoord2f(1.0f, 1.0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
         gl.glTexCoord2f(0.0f, 1.0f);
@@ -341,22 +341,25 @@ public class Cybulski1 implements GLEventListener {
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
 //?ciana lewa
-
-        gl.glTexCoord2f(1.0f, 1.0f);
+        gl.glEnd();
+         gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+        gl.glBegin(GL.GL_QUADS);
+        gl.glTexCoord2f(2.0f, 2.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glTexCoord2f(0.0f, 1.0f);
+        gl.glTexCoord2f(0.0f, 2.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glTexCoord2f(0.0f, 0.0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glTexCoord2f(1.0f, 0.0f);
+        gl.glTexCoord2f(2.0f, 0.0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
 ////?ciana prawa
-
-        gl.glTexCoord2f(1.0f, 1.0f);
+          
+         gl.glTexCoord2f(0.0f, 0.0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
         gl.glTexCoord2f(0.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glTexCoord2f(0.0f, 0.0f);
+        gl.glVertex3f(1.0f, 1.0f, 1.0f); 
+        gl.glTexCoord2f(1.0f, 1.0f);
+        
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
@@ -449,7 +452,7 @@ public class Cybulski1 implements GLEventListener {
 //}
 // gl.glEnd();       // Flush all drawing operations to the graphics card
     //  gl.glFlush();
-  //drzewko      
+    //drzewko      
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
 }
