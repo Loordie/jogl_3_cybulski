@@ -326,9 +326,9 @@ public class Cybulski1 implements GLEventListener {
         gl.glLoadIdentity();
 
         // Move the "drawing cursor" around
-        gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuni?cie o 6 jednostek
-        gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
-        gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
+        gl.glTranslatef(.0f, 0.0f, -6.0f); //przesuni?cie o 6 jednostek
+        gl.glRotatef(0.0f, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
+        gl.glRotatef(90.0f, 0.0f, 90.0f, 0.0f); //rotacja wokó? osi Y
         // Zmien swiatlo
         gl.glEnable(GL.GL_LIGHTING);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0); //swiat?o otaczajšce
@@ -342,8 +342,12 @@ public class Cybulski1 implements GLEventListener {
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_POSITION, lightPos1, 0); //pozycja ?wiat?a
         gl.glEnable(GL.GL_LIGHT1);
         gl.glEnable(GL.GL_COLOR_MATERIAL);
+        gl.glPushMatrix();
+       
+        
         //Koparka
-        //koparka.Rysuj(gl);
+        koparka.Rysuj(gl);
+         gl.glPopMatrix();
         //Scena
         scena.Rysuj(gl, t1, t2, t3);
 
